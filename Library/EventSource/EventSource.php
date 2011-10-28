@@ -104,9 +104,9 @@ class EventSource {
     public function writeAll ( $data, $event = null ) {
 
         if(null !== $event)
-            echo 'event: ' . $event . "\n";
+            echo 'event: ', $event, "\n";
 
-        echo 'data: ' . str_replace("\n", "\n" . 'data: ', $data) . "\n\n";
+        echo 'data: ', str_replace("\n", "\n" . 'data: ', $data), "\n\n";
         ob_flush();
         flush();
 
