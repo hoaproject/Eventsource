@@ -39,16 +39,16 @@ namespace {
 from('Hoa')
 
 /**
- * \Hoa\EventSource\Exception
+ * \Hoa\Eventsource\Exception
  */
--> import('EventSource.Exception');
+-> import('Eventsource.Exception');
 
 }
 
-namespace Hoa\EventSource {
+namespace Hoa\Eventsource {
 
 /**
- * Class \Hoa\EventSource\Server.
+ * Class \Hoa\Eventsource\Server.
  *
  * A cross-protocol EventSource server.
  *
@@ -57,14 +57,14 @@ namespace Hoa\EventSource {
  * @license    New BSD License
  */
 
-class EventSource {
+class Eventsource {
 
     /**
      * Output-buffer level.
      *
-     * @var \Hoa\EventSource int
+     * @var \Hoa\Eventsource int
      */
-    protected $ob_level = 0;
+    protected $obLevel = 0;
 
 
 
@@ -74,7 +74,7 @@ class EventSource {
      * @access  public
      * @param   bool  $verifyHeaders    Verify headers or not.
      * @return  void
-     * @throw   \Hoa\EventSource\Exception
+     * @throw   \Hoa\Eventsource\Exception
      */
     public function __construct ( $verifyHeaders = true ) {
 
@@ -87,10 +87,12 @@ class EventSource {
                     0, array($file, $line));
 
             header('Content-type: text/event-stream');
+            header('Transfer-Encoding: identity');
+            header('Cache-Control: no-cache');
         }
 
         ob_start();
-        $this->_ob_level = ob_get_level();
+        $this->_obLevel = ob_get_level();
 
         return;
     }
@@ -99,9 +101,11 @@ class EventSource {
      * Send an event.
      *
      * @access  public
+     * @param   string  $data     Data.
+     * @param   string  $event    Event channel.
      * @return  void
      */
-    public function writeAll ( $data, $event = null ) {
+    public function send ( $data, $event = null ) {
 
         if(null !== $event)
             echo 'event: ', $event, "\n";
@@ -121,7 +125,7 @@ class EventSource {
      */
     public function __destruct ( ) {
 
-        while($this->_ob_level <= ob_get_level())
+        while($this->_obLevel <= ob_get_level())
             ob_end_clean();
 
         return;
