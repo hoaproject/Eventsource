@@ -146,9 +146,10 @@ class Eventsource {
      *
      * @access  public
      * @param   string  $data     Data.
+     * @param   string  $id       ID (empty string to reset).
      * @return  void
      */
-    public function send ( $data ) {
+    public function send ( $data, $id = null ) {
 
         if(null !== $this->_event) {
 
@@ -158,8 +159,17 @@ class Eventsource {
 
         $data = str_replace(CRLF, "\n", trim($data));
 
-        echo 'data: ', preg_replace("#(\n|\r)#", "\n" . 'data: >', $data),
-             "\n\n";
+        echo 'data: ', preg_replace("#(\n|\r)#", "\n" . 'data: >', $data);
+
+        if(null !== $id) {
+
+            echo "\n", 'id';
+
+            if(!empty($id))
+                echo ': ', $id;
+        }
+
+        echo "\n\n";
         ob_flush();
         flush();
 
@@ -187,6 +197,17 @@ class Eventsource {
         $this->_event = $event;
 
         return $this;
+    }
+
+    /**
+     * Get last ID.
+     *
+     * @access  public
+     * @return  string
+     */
+    public function getLastId ( ) {
+
+        return \Hoa\Http\Runtime::getHeader('Last-Event-ID') ?: '';
     }
 
     /**
