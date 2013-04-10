@@ -2,7 +2,8 @@
     "name"       : "hoa/eventsource",
     "description": "The Hoa\\Eventsource library.",
     "type"       : "library",
-    "keywords"   : ["library", "eventsource"],
+    "keywords"   : ["library", "eventsource", "server", "event", "push",
+                    "http"],
     "homepage"   : "http://hoa-project.net/",
     "license"    : "BSD-3-Clause",
     "authors"    : [
