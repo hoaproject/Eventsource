@@ -156,7 +156,7 @@ class Eventsource {
             $this->_event = null;
         }
 
-        $data = str_replace(CRLF, "\n", $data);
+        $data = str_replace(CRLF, "\n", trim($data));
 
         echo 'data: ', preg_replace("#(\n|\r)#", "\n" . 'data: >', $data),
              "\n\n";
