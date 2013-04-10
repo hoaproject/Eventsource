@@ -177,6 +177,22 @@ class Eventsource {
     }
 
     /**
+     * Set the reconnection time for the client.
+     *
+     * @access  public
+     * @param   int    $ms    Time in milliseconds.
+     * @return  void
+     */
+    public function setReconnectionTime ( $ms ) {
+
+        echo 'retry: ', $ms, "\n\n";
+        ob_flush();
+        flush();
+
+        return;
+    }
+
+    /**
      * Select an event where to send data.
      *
      * @access  public
