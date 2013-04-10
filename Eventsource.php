@@ -156,7 +156,9 @@ class Eventsource {
             $this->_event = null;
         }
 
-        echo 'data: ', preg_replace("#(\n\r|\n|\r)#", "\n" . 'data: ', $data),
+        $data = str_replace(CRLF, "\n", $data);
+
+        echo 'data: ', preg_replace("#(\n|\r)#", "\n" . 'data: >', $data),
              "\n\n";
         ob_flush();
         flush();
