@@ -41,7 +41,17 @@ from('Hoa')
 /**
  * \Hoa\Eventsource\Exception
  */
--> import('Eventsource.Exception');
+-> import('Eventsource.Exception')
+
+/**
+ * \Hoa\Http\Runtime
+ */
+-> import('Http.Runtime')
+
+/**
+ * \Hoa\Http\Response
+ */
+-> import('Http.Response.~');
 
 }
 
@@ -60,11 +70,25 @@ namespace Hoa\Eventsource {
 class Eventsource {
 
     /**
+     * Mime type.
+     *
+     * @const string
+     */
+    const MIME_TYPE = 'text/event-stream';
+
+    /**
      * Output-buffer level.
      *
      * @var \Hoa\Eventsource int
      */
-    protected $obLevel = 0;
+    protected $_obLevel = 0;
+
+    /**
+     * Current event.
+     *
+     * @var \Hoa\Eventsource string
+     */
+    protected $_event   = null;
 
 
 
@@ -78,18 +102,38 @@ class Eventsource {
      */
     public function __construct ( $verifyHeaders = true ) {
 
-        if(true === $verifyHeaders) {
+        if(true === $verifyHeaders && true === headers_sent($file, $line))
+            throw new Exception(
+                'Headers already sent in %s at line %d, cannot send data ' .
+                'to client correctly.',
+                0, array($file, $line));
 
-            if(true === headers_sent($file, $line))
-                throw new Exception(
-                    'Headers already sent in %s at line %d, cannot send data ' .
-                    'to client correctly.',
-                    0, array($file, $line));
+        $mimes  = preg_split('#\s*,\s*#', \Hoa\Http\Runtime::getHeader('accept'));
+        $gotcha = false;
 
-            header('Content-type: text/event-stream');
-            header('Transfer-Encoding: identity');
-            header('Cache-Control: no-cache');
+        foreach($mimes as $mime)
+            if(0 !== preg_match('#^' . self::MIME_TYPE . ';?#', $mime)) {
+
+                $gotcha = true;
+                break;
+            }
+
+        $response = new \Hoa\Http\Response();
+
+        if(false === $gotcha) {
+
+            $response->sendHeader(
+                'Status',
+                \Hoa\Http\Response::STATUS_NOT_ACCEPTABLE
+            );
+
+            throw new Exception(
+                'Client does not accept text/event-stream.', 0);
         }
+
+        $response->sendHeader('Content-Type',      self::MIME_TYPE);
+        $response->sendHeader('Transfer-Encoding', 'identity');
+        $response->sendHeader('Cache-Control',     'no-cache');
 
         ob_start();
         $this->_obLevel = ob_get_level();
@@ -102,19 +146,45 @@ class Eventsource {
      *
      * @access  public
      * @param   string  $data     Data.
-     * @param   string  $event    Event channel.
      * @return  void
      */
-    public function send ( $data, $event = null ) {
+    public function send ( $data ) {
 
-        if(null !== $event)
-            echo 'event: ', $event, "\n";
+        if(null !== $this->_event) {
 
-        echo 'data: ', str_replace("\n", "\n" . 'data: ', $data), "\n\n";
+            echo 'event: ', $this->_event, "\n";
+            $this->_event = null;
+        }
+
+        echo 'data: ', preg_replace("#(\n\r|\n|\r)#", "\n" . 'data: ', $data),
+             "\n\n";
         ob_flush();
         flush();
 
         return;
+    }
+
+    /**
+     * Select an event where to send data.
+     *
+     * @access  public
+     * @param   string  $event    Event.
+     * @return  \Hoa\Eventsource
+     * @throw   \Hoa\Eventsource\Exception
+     */
+    public function __get ( $event ) {
+
+        if(false === (bool) preg_match('##u', $event))
+            throw new Exception(
+                'Event name %s must be in UTF-8.', 1, $event);
+
+        if(0 !== preg_match('#[:' . CRLF . ']#u', $event))
+            throw new Exception(
+                'Event name %s contains illegal characters.', 2, $event);
+
+        $this->_event = $event;
+
+        return $this;
     }
 
     /**
