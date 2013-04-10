@@ -77,18 +77,18 @@ class Eventsource {
     const MIME_TYPE = 'text/event-stream';
 
     /**
-     * Output-buffer level.
-     *
-     * @var \Hoa\Eventsource int
-     */
-    protected $_obLevel = 0;
-
-    /**
      * Current event.
      *
      * @var \Hoa\Eventsource string
      */
-    protected $_event   = null;
+    protected $_event    = null;
+
+    /**
+     * HTTP response.
+     *
+     * @var \Hoa\Http\Response object
+     */
+    protected $_response = null;
 
 
 
@@ -118,11 +118,11 @@ class Eventsource {
                 break;
             }
 
-        $response = new \Hoa\Http\Response();
+        $this->_response = new \Hoa\Http\Response(false);
 
         if(false === $gotcha) {
 
-            $response->sendHeader(
+            $this->_response->sendHeader(
                 'Status',
                 \Hoa\Http\Response::STATUS_NOT_ACCEPTABLE
             );
@@ -131,12 +131,10 @@ class Eventsource {
                 'Client does not accept %s.', 1, self::MIME_TYPE);
         }
 
-        $response->sendHeader('Content-Type',      self::MIME_TYPE);
-        $response->sendHeader('Transfer-Encoding', 'identity');
-        $response->sendHeader('Cache-Control',     'no-cache');
-
-        ob_start();
-        $this->_obLevel = ob_get_level();
+        $this->_response->sendHeader('Content-Type',      self::MIME_TYPE);
+        $this->_response->sendHeader('Transfer-Encoding', 'identity');
+        $this->_response->sendHeader('Cache-Control',     'no-cache');
+        $this->_response->newBuffer();
 
         return;
     }
@@ -153,25 +151,26 @@ class Eventsource {
 
         if(null !== $this->_event) {
 
-            echo 'event: ', $this->_event, "\n";
+            $this->_response->writeAll('event: ' . $this->_event . "\n");
             $this->_event = null;
         }
 
         $data = str_replace(CRLF, "\n", trim($data));
 
-        echo 'data: ', preg_replace("#(\n|\r)#", "\n" . 'data: >', $data);
+        $this->_response->writeAll(
+            'data: ' . preg_replace("#(\n|\r)#", "\n" . 'data: >', $data)
+        );
 
         if(null !== $id) {
 
-            echo "\n", 'id';
+            $this->_response->writeAll("\n" . 'id');
 
             if(!empty($id))
-                echo ': ', $id;
+                $this->_response->writeAll(': ' . $id);
         }
 
-        echo "\n\n";
-        ob_flush();
-        flush();
+        $this->_response->writeAll("\n\n");
+        $this->_response->flush(true);
 
         return;
     }
@@ -185,9 +184,8 @@ class Eventsource {
      */
     public function setReconnectionTime ( $ms ) {
 
-        echo 'retry: ', $ms, "\n\n";
-        ob_flush();
-        flush();
+        $this->_response->writeAll('retry: ' . $ms . "\n\n");
+        $this->_response->flush(true);
 
         return;
     }
@@ -224,20 +222,6 @@ class Eventsource {
     public function getLastId ( ) {
 
         return \Hoa\Http\Runtime::getHeader('Last-Event-ID') ?: '';
-    }
-
-    /**
-     * Close the event source.
-     *
-     * @access  public
-     * @return  void
-     */
-    public function __destruct ( ) {
-
-        while($this->_obLevel <= ob_get_level())
-            ob_end_clean();
-
-        return;
     }
 }
 
