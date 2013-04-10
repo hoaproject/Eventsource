@@ -128,7 +128,7 @@ class Eventsource {
             );
 
             throw new Exception(
-                'Client does not accept text/event-stream.', 0);
+                'Client does not accept %s.', 1, self::MIME_TYPE);
         }
 
         $response->sendHeader('Content-Type',      self::MIME_TYPE);
@@ -204,11 +204,11 @@ class Eventsource {
 
         if(false === (bool) preg_match('##u', $event))
             throw new Exception(
-                'Event name %s must be in UTF-8.', 1, $event);
+                'Event name %s must be in UTF-8.', 2, $event);
 
         if(0 !== preg_match('#[:' . CRLF . ']#u', $event))
             throw new Exception(
-                'Event name %s contains illegal characters.', 2, $event);
+                'Event name %s contains illegal characters.', 3, $event);
 
         $this->_event = $event;
 
