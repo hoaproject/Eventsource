@@ -67,7 +67,7 @@ namespace Hoa\Eventsource {
  * @license    New BSD License
  */
 
-class Eventsource {
+class Server {
 
     /**
      * Mime type.
@@ -79,7 +79,7 @@ class Eventsource {
     /**
      * Current event.
      *
-     * @var \Hoa\Eventsource string
+     * @var \Hoa\Eventsource\Server string
      */
     protected $_event    = null;
 
@@ -195,7 +195,7 @@ class Eventsource {
      *
      * @access  public
      * @param   string  $event    Event.
-     * @return  \Hoa\Eventsource
+     * @return  \Hoa\Eventsource\Server
      * @throw   \Hoa\Eventsource\Exception
      */
     public function __get ( $event ) {
