@@ -155,10 +155,9 @@ class Server {
             $this->_event = null;
         }
 
-        $data = str_replace(CRLF, "\n", trim($data));
-
         $this->_response->writeAll(
-            'data: ' . preg_replace("#(\n|\r)#", "\n" . 'data: >', $data)
+            'data: ' .
+            preg_replace("#(" . CRLF . "|\n|\r)#", "\n" . 'data: >', $data)
         );
 
         if(null !== $id) {
