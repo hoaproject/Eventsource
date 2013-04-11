@@ -112,7 +112,7 @@ class Server {
         $gotcha = false;
 
         foreach($mimes as $mime)
-            if(0 !== preg_match('#^' . self::MIME_TYPE . ';?#', $mime)) {
+            if(0 !== preg_match('#^(\*/\*|' . self::MIME_TYPE . ';?)#', $mime)) {
 
                 $gotcha = true;
                 break;
