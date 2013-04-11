@@ -126,6 +126,10 @@ class Server {
                 'Status',
                 \Hoa\Http\Response::STATUS_NOT_ACCEPTABLE
             );
+            $this->_response->sendHeader(
+                'Content-Type',
+                'text/plain; charset=utf-8'
+            );
 
             throw new Exception(
                 'Client does not accept %s.', 1, self::MIME_TYPE);
