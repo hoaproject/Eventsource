@@ -161,7 +161,7 @@ class Server {
 
         $this->_response->writeAll(
             'data: ' .
-            preg_replace("#(" . CRLF . "|\n|\r)#", "\n" . 'data: >', $data)
+            preg_replace("#(" . CRLF . "|\n|\r)#", "\n" . 'data: ', $data)
         );
 
         if(null !== $id) {
