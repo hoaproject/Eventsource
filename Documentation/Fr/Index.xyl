@@ -107,10 +107,10 @@ catch ( e ) {
   <p>Sur l'instance de notre serveur, nous appelons un <strong>attribut</strong>
   du nom de notre événement, puis notre méthode
   <code>Hoa\Eventsource\Server::send</code>. Si l'événement porte un nom plus
-  compliqué, nous pouvons utiliser la syntaxe
-  <code class="language-php">$server->{'ti-ck'}->send(time());</code> (veillez
-  dans ce cas à vous assurer que votre client supporte ce type
-  d'événements).</p>
+  compliqué, nous pouvons utiliser la syntaxe avec des accolades (veillez dans
+  ce cas à vous assurer que votre client supporte ce type d'événements). Par
+  exemple, pour le nom <code>ti-ck</code>, nous écrirons
+  <code class="language-php">$server->{'ti-ck'}->send(time())</code>.</p>
   <p>Si nous précisons un nom d'événement pour nos données, nous devons modifier
   le client en conséquence en utilisant <code>addEventListener</code> au lieu de
   <code>onmessage</code> :</p>
