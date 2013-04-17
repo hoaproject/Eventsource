@@ -5,7 +5,7 @@
 
   <p>EventSource, ou <em lang="en">Server-Sent Events</em>, est une technologie
   permettant à un <strong>serveur</strong> HTTP <strong>d'envoyer</strong> des
-  <strong>événements</strong> sur un client. La bibliothèque
+  <strong>événements</strong> à un client. La bibliothèque
   <code>Hoa\Eventsource</code> permet de créer un serveur EventSource.</p>
 
   <h2 id="Table_des_matieres">Table des matières</h2>
@@ -20,17 +20,17 @@
   <strong>notifications</strong> selon le vocabulaire utilisé) à un client. Ces
   événements sont constitués de <strong>données</strong> et, potentiellement,
   d'<strong>identifiants</strong>.</p>
-  <p>Certains peuvent se demander quelles sont les différences entre EventSource
-  et WebSocket (voir la bibliothèque
-  <a href="@lh:chapter=Websocket"><code>Hoa\Websocket</code></a>).  Même si la
-  connexion est initiée par le client dans les deux cas, seul le serveur peut
-  écrire dessus avec EventSource : c'est donc une communication
-  <strong>unidirectionnelle</strong>, alors que Websocket permet une
-  communication bidirectionnelle. De plus, EventSource se base sur le mode
-  <em lang="en">chunked</em> d'HTTP permettant au serveur d'envoyer une réponse
-  morceau après morceau (voir la
+  <p>Nous pouvons nous demander quelles sont les différences entre EventSource et
+  WebSocket. Ces deux solutions sont en fait fondamentalement différentes :
+  EventSource est une technologie basée sur le <strong>protocole HTTP</strong>
+  et ne propose qu'une communication <strong>unidirectionnelle</strong>. Pour
+  un usage full-duplex et bidirectionnel nous lui préférerons le protocole
+  WebSocket (voir la bibliothèque
+  <a href="@lh:chapter=Websocket"><code>Hoa\Websocket</code></a>).
+  EventSource se base sur le mode <em lang="en">chunked</em> d'HTTP permettant
+  au serveur d'envoyer une réponse morceau après morceau (voir la
   <a href="https://tools.ietf.org/html/rfc2616#section-3.6.1">section 3.6.1,
-  <em lang="en">Chunked Transfer Coding</em> de la RFC2616</a>) ; aussi, un
+  <em lang="en">Chunked Transfer Coding</em> de la RFC2616</a>) ; aussi, un
   serveur EventSource est-il plus léger, plus simple et est conçu pour être
   robuste aux déconnexions.</p>
 
@@ -93,7 +93,7 @@ catch ( e ) {
 }</code></pre>
   <p>Nous pouvons observer le résultat en ouvrant le client dans notre
   navigateur préféré. Attention à bien démarrer un serveur HTTP.</p>
-  <p>Toutes les données arrivent sur le client sans <strong>distinction</strong>
+  <p>Toutes les données arrivent au client sans <strong>distinction</strong>
   particulière (notons néanmoins que l'ordre est préservé). Pour l'instant, les
   données sont de simples messages. Ce que nous aimerions, c'est
   <strong>trier</strong> ces données en les <strong>associant</strong> à des
