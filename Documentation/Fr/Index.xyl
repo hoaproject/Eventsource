@@ -20,17 +20,17 @@
   <strong>notifications</strong> selon le vocabulaire utilisé) à un client. Ces
   événements sont constitués de <strong>données</strong> et, potentiellement,
   d'<strong>identifiants</strong>.</p>
-  <p>Nous pouvons nous demander quelles sont les différences entre EventSource et
-  WebSocket. Ces deux solutions sont en fait fondamentalement différentes :
+  <p>Nous pouvons nous demander quelles sont les différences entre EventSource
+  et WebSocket. Ces deux solutions sont en fait fondamentalement différentes :
   EventSource est une technologie basée sur le <strong>protocole HTTP</strong>
-  et ne propose qu'une communication <strong>unidirectionnelle</strong>. Pour
-  un usage full-duplex et bidirectionnel nous lui préférerons le protocole
+  et ne propose qu'une communication <strong>unidirectionnelle</strong>. Pour un
+  usage full-duplex et bidirectionnel nous lui préférerons le protocole
   WebSocket (voir la bibliothèque
-  <a href="@lh:chapter=Websocket"><code>Hoa\Websocket</code></a>).
-  EventSource se base sur le mode <em lang="en">chunked</em> d'HTTP permettant
-  au serveur d'envoyer une réponse morceau après morceau (voir la
+  <a href="@lh:chapter=Websocket"><code>Hoa\Websocket</code></a>). EventSource
+  se base sur le mode <em lang="en">chunked</em> d'HTTP permettant au serveur
+  d'envoyer une réponse morceau après morceau (voir la
   <a href="https://tools.ietf.org/html/rfc2616#section-3.6.1">section 3.6.1,
-  <em lang="en">Chunked Transfer Coding</em> de la RFC2616</a>) ; aussi, un
+  <em lang="en">Chunked Transfer Coding</em> de la RFC2616</a>) ; aussi, un
   serveur EventSource est-il plus léger, plus simple et est conçu pour être
   robuste aux déconnexions.</p>
 
