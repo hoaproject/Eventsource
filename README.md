@@ -32,8 +32,8 @@ And in `index.html`, our client:
 
     try {
 
-        var source       = new EventSource('Server.php');
-        source.onopen    = function ( ) {
+        var source    = new EventSource('Server.php');
+        source.onopen = function ( ) {
 
             output.appendChild(document.createElement('hr'));
 
