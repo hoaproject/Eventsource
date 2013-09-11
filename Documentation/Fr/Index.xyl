@@ -92,7 +92,8 @@ catch ( e ) {
     sleep(1);
 }</code></pre>
   <p>Nous pouvons observer le résultat en ouvrant le client dans notre
-  navigateur préféré. Attention à bien démarrer un serveur <strong>HTTP</strong>.</p>
+  navigateur préféré. Attention à bien démarrer un serveur
+  <strong>HTTP</strong>.</p>
   <p>Toutes les données arrivent au client sans <strong>distinction</strong>
   particulière (notons néanmoins que l'ordre est préservé). Pour l'instant, les
   données sont de simples messages. Ce que nous aimerions, c'est
