@@ -39,10 +39,7 @@
   <p>La classe <code>Hoa\Eventsource\Server</code> permet de créer un serveur
   EventSource. Pour le <strong>démarrer</strong>, il suffit d'instancier la
   classe. Ainsi, dans <code>Server.php</code> :</p>
-  <pre><code class="language-php">from('Hoa')
--> import('Eventsource.Server');
-
-$server = new Hoa\Eventsource\Server();</code></pre>
+  <pre><code class="language-php">$server = new Hoa\Eventsource\Server();</code></pre>
   <p>Écrivons maintenant un client HTML très simple pour exécuter notre serveur,
   dans <code>index.html</code>. Nous allons uniquement utiliser
   l'<a href="https://developer.mozilla.org/docs/Server-sent_events/EventSource">objet
