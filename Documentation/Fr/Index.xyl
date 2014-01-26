@@ -26,8 +26,8 @@
   et ne propose qu'une communication <strong>unidirectionnelle</strong>. Pour un
   usage full-duplex et bidirectionnel nous lui préférerons le protocole
   WebSocket (voir <a href="@lh:chapter=Websocket">la bibliothèque
-  <code>Hoa\Websocket</code></a>). EventSource se base sur le mode <em
-  lang="en">chunked</em> d'HTTP permettant au serveur d'envoyer une réponse
+  <code>Hoa\Websocket</code></a>). EventSource se base sur le mode
+  <em lang="en">chunked</em> d'HTTP permettant au serveur d'envoyer une réponse
   morceau après morceau (voir la
   <a href="https://tools.ietf.org/html/rfc2616#section-3.6.1">section 3.6.1,
   <em lang="en">Chunked Transfer Coding</em> de la RFC2616</a>) ; aussi, un
