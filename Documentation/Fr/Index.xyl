@@ -8,7 +8,7 @@
   <strong>événements</strong> à un client. La bibliothèque
   <code>Hoa\Eventsource</code> permet de créer un serveur EventSource.</p>
 
-  <h2 id="Table_des_matieres">Table des matières</h2>
+  <h2 id="Table_of_contents">Table des matières</h2>
 
   <tableofcontents id="main-toc" />
 
@@ -34,7 +34,7 @@
   serveur EventSource est-il plus léger, plus simple et est conçu pour être
   robuste aux déconnexions.</p>
 
-  <h2 id="Flux_d-evenements" for="main-toc">Flux d'événements</h2>
+  <h2 id="Events_stream" for="main-toc">Flux d'événements</h2>
 
   <p>La classe <code>Hoa\Eventsource\Server</code> permet de créer un serveur
   EventSource. Pour le <strong>démarrer</strong>, il suffit d'instancier la
@@ -75,7 +75,7 @@ catch ( e ) {
   <p>Voyons maintenant comment envoyer des événements et les données
   associées.</p>
 
-  <h3 id="Donnees_et_evenements" for="main-toc">Données et événements</h3>
+  <h3 id="Data_and_events" for="main-toc">Données et événements</h3>
 
   <p>Pour <strong>envoyer</strong> des données, nous allons utiliser la méthode
   <code>Hoa\Eventsource\Server::send</code>, qui prend en premier argument la
@@ -122,7 +122,7 @@ catch ( e ) {
   <strong>particulier</strong>. Nous ne sommes pas limités , ni en nombre de
   données, ni en nombre d'événements.</p>
 
-  <h3 id="Reconnection" for="main-toc">Reconnection</h3>
+  <h3 id="Reconnection" for="main-toc">Reconnexion</h3>
 
   <p>Lorsque la connexion est <strong>interrompue</strong> (parce que le client
   perd la connexion au réseau par exemple, ou lorsque le serveur coupe la
@@ -143,7 +143,7 @@ catch ( e ) {
   serveur est déconnecté, le serveur HTTP est <strong>déchargé</strong> d'une
   connexion, ce qui permet de libérer des ressources.</p>
 
-  <h3 id="Identifiant" for="main-toc">Identifiant</h3>
+  <h3 id="Identifier" for="main-toc">Identifiant</h3>
 
   <p>Quand nous envoyons des données sur le client, nous pouvons les associer à
   des <strong>identifiants</strong>. Le client va automatiquement se rappeler du
@@ -175,7 +175,7 @@ for($i = mt_rand(2, 5); $i >= 0; --$i) {
   <strong>réinitialiser</strong> le dernier identifiant du client à sa valeur
   d'origine.</p>
 
-  <h2 id="Type_et_acceptation" for="main-toc">Type et acceptation</h2>
+  <h2 id="Type_and_acceptation" for="main-toc">Type et acceptation</h2>
 
   <p>Le <strong>type</strong> d'un serveur EventSource est donné par la
   constante <code>Hoa\Eventsource\Server::MIME_TYPE</code>, soit la chaîne
