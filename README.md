@@ -3,7 +3,7 @@
 Hoa is a **modular**, **extensible** and **structured** set of PHP libraries.
 Moreover, Hoa aims at being a bridge between industrial and research worlds.
 
-# Hoa\Eventsource
+# Hoa\Eventsource ![state](http://central.hoa-project.net/State/Eventsource)
 
 This library allows to manipulate the
 [EventSource](http://w3.org/TR/eventsource/) (aka Server-Sent Events) technology
