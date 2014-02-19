@@ -61,6 +61,14 @@ time before the client will reconnect after a disconnection. The
 `Hoa\Eventsource\Server::getLastId` method allows to retrieve the last ID sent
 to the client.
 
+## Awecode
+
+The following awecodes show this library in action:
+
+  * [`Hoa\Eventsource`](http://hoa-project.net/Awecode/Eventsource.html):
+    *why and how to use `Hoa\Eventsource\Server`? A simple and daily useful
+    example will illustrate the EventSource technology (or Server-Send Events)*.
+
 ## Documentation
 
 Different documentations can be found on the website:
