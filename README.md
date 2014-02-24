@@ -15,44 +15,48 @@ We propose as a quick overview to send an unlimited number of events from the
 server to the client. The client will display all received events. Thus, in
 `Server.php`:
 
-    $server = new Hoa\Eventsource\Server();
+```php
+$server = new Hoa\Eventsource\Server();
 
-    while(true) {
+while(true) {
 
-        // “tick” is the event name.
-        $server->tick->send(time());
-        sleep(1);
-    }
+    // “tick” is the event name.
+    $server->tick->send(time());
+    sleep(1);
+}
+```
 
 And in `index.html`, our client:
 
-    <pre id="output"></pre>
-    <script>
-    var output = document.getElementById('output');
+```html
+<pre id="output"></pre>
+<script>
+var output = document.getElementById('output');
 
-    try {
+try {
 
-        var source    = new EventSource('Server.php');
-        source.onopen = function ( ) {
+    var source    = new EventSource('Server.php');
+    source.onopen = function ( ) {
 
-            output.appendChild(document.createElement('hr'));
+        output.appendChild(document.createElement('hr'));
 
-            return;
-        };
-        source.addEventListener('tick', function ( evt ) {
+        return;
+    };
+    source.addEventListener('tick', function ( evt ) {
 
-            var samp       = document.createElement('samp');
-            samp.innerHTML = evt.data + '\n';
-            output.appendChild(samp);
+        var samp       = document.createElement('samp');
+        samp.innerHTML = evt.data + '\n';
+        output.appendChild(samp);
 
-            return;
-        });
-    }
-    catch ( e ) {
+        return;
+    });
+}
+catch ( e ) {
 
-        console.log(e);
-    }
-    </script>
+    console.log(e);
+}
+</script>
+```
 
 Start your HTTP server and then open `index.html`.
 
