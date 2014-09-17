@@ -9,6 +9,23 @@ This library allows to manipulate the
 [EventSource](http://w3.org/TR/eventsource/) (aka Server-Sent Events) technology
 by creating a server.
 
+## Installation
+
+With [Composer](http://getcomposer.org/), to include this library into your
+dependencies, you need to require
+[`hoa/eventsource`](https://packagist.org/packages/hoa/eventsource):
+
+```json
+{
+    "require": {
+        "hoa/eventsource": "~2.0"
+    }
+}
+```
+
+Please, read the website to [get more informations about how to
+install](http://hoa-project.net/Source.html).
+
 ## Quick usage
 
 We propose as a quick overview to send an unlimited number of events from the
