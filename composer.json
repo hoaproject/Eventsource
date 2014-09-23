@@ -26,5 +26,10 @@
         "hoa/http": "~0.0"
     },
     "target-dir": "Hoa/Eventsource",
-    "autoload"  : { "psr-0": { "Hoa\\Eventsource": "." } }
+    "autoload"  : { "psr-0": { "Hoa\\Eventsource": "." } },
+    "extra"     : {
+        "branch-alias": {
+            "dev-master": "2.x-dev"
+        }
+    }
 }
