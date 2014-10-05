@@ -34,7 +34,9 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
 
-namespace Hoa\EventSource {
+namespace Hoa\EventSource;
+
+use Hoa\Core;
 
 /**
  * Class \Hoa\EventSource\Exception.
@@ -46,6 +48,4 @@ namespace Hoa\EventSource {
  * @license    New BSD License
  */
 
-class Exception extends \Hoa\Core\Exception { }
-
-}
+class Exception extends Core\Exception { }

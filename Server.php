@@ -34,28 +34,9 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
 
-namespace {
+namespace Hoa\Eventsource;
 
-from('Hoa')
-
-/**
- * \Hoa\Eventsource\Exception
- */
--> import('Eventsource.Exception')
-
-/**
- * \Hoa\Http\Runtime
- */
--> import('Http.Runtime')
-
-/**
- * \Hoa\Http\Response
- */
--> import('Http.Response.~');
-
-}
-
-namespace Hoa\Eventsource {
+use Hoa\Http;
 
 /**
  * Class \Hoa\Eventsource\Server.
@@ -106,9 +87,9 @@ class Server {
             throw new Exception(
                 'Headers already sent in %s at line %d, cannot send data ' .
                 'to client correctly.',
-                0, array($file, $line));
+                0, [$file, $line]);
 
-        $mimes  = preg_split('#\s*,\s*#', \Hoa\Http\Runtime::getHeader('accept'));
+        $mimes  = preg_split('#\s*,\s*#', Http\Runtime::getHeader('accept'));
         $gotcha = false;
 
         foreach($mimes as $mime)
@@ -118,13 +99,13 @@ class Server {
                 break;
             }
 
-        $this->_response = new \Hoa\Http\Response(false);
+        $this->_response = new Http\Response(false);
 
         if(false === $gotcha) {
 
             $this->_response->sendHeader(
                 'Status',
-                \Hoa\Http\Response::STATUS_NOT_ACCEPTABLE
+                Http\Response::STATUS_NOT_ACCEPTABLE
             );
             $this->_response->sendHeader(
                 'Content-Type',
@@ -224,8 +205,6 @@ class Server {
      */
     public function getLastId ( ) {
 
-        return \Hoa\Http\Runtime::getHeader('Last-Event-ID') ?: '';
+        return Http\Runtime::getHeader('Last-Event-ID') ?: '';
     }
-}
-
 }
