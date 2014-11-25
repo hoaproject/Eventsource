@@ -25,14 +25,14 @@
         "hoa/core": "~2.0",
         "hoa/http": "~0.0"
     },
+    "require-dev": {
+        "hoa/test": "~1.0"
+    },
     "target-dir": "Hoa/Eventsource",
     "autoload"  : { "psr-0": { "Hoa\\Eventsource": "." } },
     "extra"     : {
         "branch-alias": {
             "dev-master": "2.x-dev"
         }
-    },
-    "require-dev": {
-        "hoa/test": "~1.0"
     }
 }
