@@ -25,7 +25,7 @@
   EventSource est une technologie basée sur le <strong>protocole HTTP</strong>
   et ne propose qu'une communication <strong>unidirectionnelle</strong>. Pour un
   usage full-duplex et bidirectionnel nous lui préférerons le protocole
-  WebSocket (voir <a href="@lh:chapter=Websocket">la bibliothèque
+  WebSocket (voir <a href="@hack:chapter=Websocket">la bibliothèque
   <code>Hoa\Websocket</code></a>). EventSource se base sur le mode
   <em lang="en">chunked</em> d'HTTP permettant au serveur d'envoyer une réponse
   morceau après morceau (voir la
@@ -263,7 +263,7 @@ id: 1
   d'<strong>envoyer</strong> des <strong>événements</strong> sur un client. La
   communication est <strong>unidirectionnelle</strong> ; pour une communication
   bidirectionnelle, il faudra se tourner vers
-  <a href="@lh:chapter=Websocket"><code>Hoa\Websocket</code></a>.</p>
+  <a href="@hack:chapter=Websocket"><code>Hoa\Websocket</code></a>.</p>
 
 </yield>
 </overlay>
