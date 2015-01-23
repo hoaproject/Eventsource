@@ -26,7 +26,7 @@
   only provides a <strong>unidirectional</strong> communication. For a
   full-duplex and bidirectional usage, we will prefer the WebSocket protocol
   (see
-  <a href="@lh:chapter=Websocket">the <code>Hoa\Websocket</code> library</a>).
+  <a href="@hack:chapter=Websocket">the <code>Hoa\Websocket</code> library</a>).
   EventSource is based on the chunked HTTP mode allowing a server to send a
   response piece by piece (see the
   <a href="https://tools.ietf.org/html/rfc2616#section-3.6.1">section 3.6.1,
@@ -255,7 +255,7 @@ id: 1
   <strong>servers</strong>. These latters allow to <strong>send events</strong>
   to a client. The communication is <strong>unidirectional</strong>; for a
   <strong>bidirectional</strong> communication, we have to use
-  <a href="@lh:chapter=Websocket"><code>Hoa\Websocket</code></a>.</p>
+  <a href="@hack:chapter=Websocket"><code>Hoa\Websocket</code></a>.</p>
 
 </yield>
 </overlay>
