@@ -1,3 +1,9 @@
+# 2.15.02.19
+
+  * Add the CHANGELOG.md file. (Ivan Enderlin, 2015-02-19T08:50:50+01:00)
+  * Update links in the documentation. (Ivan Enderlin, 2015-01-23T19:25:23+01:00)
+  * Happy new year! (Ivan Enderlin, 2015-01-05T14:28:43+01:00)
+
 # 2.14.12.10
 
   * Move to PSR-4. (Ivan Enderlin, 2014-12-09T13:45:54+01:00)
