@@ -1,3 +1,7 @@
+# 2.15.04.13
+
+  * Disable proxy buffering on nginx. (Ivan Enderlin, 2015-02-24T16:43:16+01:00)
+
 # 2.15.02.19
 
   * Add the CHANGELOG.md file. (Ivan Enderlin, 2015-02-19T08:50:50+01:00)
