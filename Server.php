@@ -8,7 +8,7 @@
  *
  * New BSD License
  *
- * Copyright © 2007-2015, Ivan Enderlin. All rights reserved.
+ * Copyright © 2007-2015, Hoa community. All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
@@ -43,13 +43,11 @@ use Hoa\Http;
  *
  * A cross-protocol EventSource server.
  *
- * @author     Ivan Enderlin <ivan.enderlin@hoa-project.net>
- * @copyright  Copyright © 2007-2015 Ivan Enderlin.
+ * @copyright  Copyright © 2007-2015 Hoa community
  * @license    New BSD License
  */
-
-class Server {
-
+class Server
+{
     /**
      * Mime type.
      *
@@ -60,14 +58,14 @@ class Server {
     /**
      * Current event.
      *
-     * @var \Hoa\Eventsource\Server string
+     * @var string
      */
     protected $_event    = null;
 
     /**
      * HTTP response.
      *
-     * @var \Hoa\Http\Response object
+     * @var \Hoa\Http\Response
      */
     protected $_response = null;
 
@@ -76,33 +74,35 @@ class Server {
     /**
      * Start an event source.
      *
-     * @access  public
      * @param   bool  $verifyHeaders    Verify headers or not.
      * @return  void
-     * @throw   \Hoa\Eventsource\Exception
+     * @throws  \Hoa\Eventsource\Exception
      */
-    public function __construct ( $verifyHeaders = true ) {
-
-        if(true === $verifyHeaders && true === headers_sent($file, $line))
+    public function __construct($verifyHeaders = true)
+    {
+        if (true === $verifyHeaders && true === headers_sent($file, $line)) {
             throw new Exception(
                 'Headers already sent in %s at line %d, cannot send data ' .
                 'to client correctly.',
-                0, [$file, $line]);
+                0,
+                [$file, $line]
+            );
+        }
 
         $mimes  = preg_split('#\s*,\s*#', Http\Runtime::getHeader('accept'));
         $gotcha = false;
 
-        foreach($mimes as $mime)
-            if(0 !== preg_match('#^(\*/\*|' . self::MIME_TYPE . ';?)#', $mime)) {
-
+        foreach ($mimes as $mime) {
+            if (0 !== preg_match('#^(\*/\*|' . self::MIME_TYPE . ';?)#', $mime)) {
                 $gotcha = true;
+
                 break;
             }
+        }
 
         $this->_response = new Http\Response(false);
 
-        if(false === $gotcha) {
-
+        if (false === $gotcha) {
             $this->_response->sendHeader(
                 'Status',
                 Http\Response::STATUS_NOT_ACCEPTABLE
@@ -113,7 +113,10 @@ class Server {
             );
 
             throw new Exception(
-                'Client does not accept %s.', 1, self::MIME_TYPE);
+                'Client does not accept %s.',
+                1,
+                self::MIME_TYPE
+            );
         }
 
         $this->_response->sendHeader('Content-Type',      self::MIME_TYPE);
@@ -128,15 +131,13 @@ class Server {
     /**
      * Send an event.
      *
-     * @access  public
      * @param   string  $data     Data.
      * @param   string  $id       ID (empty string to reset).
      * @return  void
      */
-    public function send ( $data, $id = null ) {
-
-        if(null !== $this->_event) {
-
+    public function send($data, $id = null)
+    {
+        if (null !== $this->_event) {
             $this->_response->writeAll('event: ' . $this->_event . "\n");
             $this->_event = null;
         }
@@ -146,12 +147,12 @@ class Server {
             preg_replace("#(" . CRLF . "|\n|\r)#", "\n" . 'data: ', $data)
         );
 
-        if(null !== $id) {
-
+        if (null !== $id) {
             $this->_response->writeAll("\n" . 'id');
 
-            if(!empty($id))
+            if (!empty($id)) {
                 $this->_response->writeAll(': ' . $id);
+            }
         }
 
         $this->_response->writeAll("\n\n");
@@ -163,12 +164,11 @@ class Server {
     /**
      * Set the reconnection time for the client.
      *
-     * @access  public
      * @param   int    $ms    Time in milliseconds.
      * @return  void
      */
-    public function setReconnectionTime ( $ms ) {
-
+    public function setReconnectionTime($ms)
+    {
         $this->_response->writeAll('retry: ' . $ms . "\n\n");
         $this->_response->flush(true);
 
@@ -178,20 +178,27 @@ class Server {
     /**
      * Select an event where to send data.
      *
-     * @access  public
      * @param   string  $event    Event.
      * @return  \Hoa\Eventsource\Server
-     * @throw   \Hoa\Eventsource\Exception
+     * @throws  \Hoa\Eventsource\Exception
      */
-    public function __get ( $event ) {
-
-        if(false === (bool) preg_match('##u', $event))
+    public function __get($event)
+    {
+        if (false === (bool) preg_match('##u', $event)) {
             throw new Exception(
-                'Event name %s must be in UTF-8.', 2, $event);
+                'Event name %s must be in UTF-8.',
+                2,
+                $event
+            );
+        }
 
-        if(0 !== preg_match('#[:' . CRLF . ']#u', $event))
+        if (0 !== preg_match('#[:' . CRLF . ']#u', $event)) {
             throw new Exception(
-                'Event name %s contains illegal characters.', 3, $event);
+                'Event name %s contains illegal characters.',
+                3,
+                $event
+            );
+        }
 
         $this->_event = $event;
 
@@ -201,11 +208,10 @@ class Server {
     /**
      * Get last ID.
      *
-     * @access  public
      * @return  string
      */
-    public function getLastId ( ) {
-
+    public function getLastId()
+    {
         return Http\Runtime::getHeader('Last-Event-ID') ?: '';
     }
 }

@@ -35,8 +35,7 @@ server to the client. The client will display all received events. Thus, in
 ```php
 $server = new Hoa\Eventsource\Server();
 
-while(true) {
-
+while (true) {
     // “tick” is the event name.
     $server->tick->send(time());
     sleep(1);
@@ -51,25 +50,20 @@ And in `index.html`, our client:
 var output = document.getElementById('output');
 
 try {
-
     var source    = new EventSource('Server.php');
-    source.onopen = function ( ) {
-
+    source.onopen = function () {
         output.appendChild(document.createElement('hr'));
 
         return;
     };
-    source.addEventListener('tick', function ( evt ) {
-
+    source.addEventListener('tick', function (evt) {
         var samp       = document.createElement('samp');
         samp.innerHTML = evt.data + '\n';
         output.appendChild(samp);
 
         return;
     });
-}
-catch ( e ) {
-
+} catch (e) {
     console.log(e);
 }
 </script>

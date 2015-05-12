@@ -50,25 +50,20 @@
 var output = document.getElementById('output');
 
 try {
-
-    var source       = new EventSource('Server.php');
-    source.onopen    = function ( ) {
-
+    var source    = new EventSource('Server.php');
+    source.onopen = function () {
         output.appendChild(document.createElement('hr'));
 
         return;
     };
-    source.onmessage = function ( evt ) {
-
+    source.onmessage = function (evt) {
         var samp       = document.createElement('samp');
         samp.innerHTML = evt.data + '\n';
         output.appendChild(samp);
 
         return;
     };
-}
-catch ( e ) {
-
+} catch (e) {
     console.log(e);
 }
 &amp;lt;/script></code></pre>
@@ -83,8 +78,7 @@ catch ( e ) {
   plusieurs natures : <code>\n</code>, <code>\r</code> et même
   <code>\r\n</code>. Dans notre serveur, nous allons écrire une infinité de
   message et ce, toutes les secondes :</p>
-  <pre><code class="language-php">while(true) {
-
+  <pre><code class="language-php">while (true) {
     $server->send(time());
     sleep(1);
 }</code></pre>
@@ -97,8 +91,7 @@ catch ( e ) {
   <strong>trier</strong> ces données en les <strong>associant</strong> à des
   noms d'événement. Par exemple, pour associer toutes les données à l'événement
   <code>tick</code>, nous écrirons :</p>
-  <pre data-line="3"><code class="language-php">while(true) {
-
+  <pre data-line="2"><code class="language-php">while (true) {
     $server->tick->send(time());
     sleep(1);
 }</code></pre>
@@ -112,10 +105,9 @@ catch ( e ) {
   <p>Si nous précisons un nom d'événement pour nos données, nous devons modifier
   le client en conséquence en utilisant <code>addEventListener</code> au lieu de
   <code>onmessage</code> :</p>
-  <pre data-line-offset="11" data-line="14"><code class="language-javascript">        return;
+  <pre data-line-offset="9" data-line="12"><code class="language-javascript">        return;
     };
-    source.addEventListener('tick', function ( evt ) {
-
+    source.addEventListener('tick', function (evt) {
         var samp       = document.createElement('samp');
         samp.innerHTML = evt.data + '\n';</code></pre>
   <p>Relançons notre client. Le message est bien capturé pour un événement
@@ -165,8 +157,7 @@ catch ( e ) {
 $server->tick->send('last ID is ' . $id);
 ++$id;
 
-for($i = mt_rand(2, 5); $i >= 0; --$i) {
-
+for ($i = mt_rand(2, 5); $i >= 0; --$i) {
     $server->tick->send(time(), $id);
     sleep(1);
 }</code></pre>
@@ -190,13 +181,11 @@ for($i = mt_rand(2, 5); $i >= 0; --$i) {
   Il est possible de la capturer et d'afficher notre propre erreur, comme
   ceci :</p>
   <pre><code class="language-php">try {
-
     $server = new Hoa\Eventsource\Server();
-}
-catch ( Hoa\Eventsource\Exception $e ) {
-
-    echo 'You must send a request with ',
-         '“Accept: ', Hoa\Eventsource\Server::MIME_TYPE, '”.', "\n";
+} catch (Hoa\Eventsource\Exception $e) {
+    echo
+        'You must send a request with ',
+        '“Accept: ', Hoa\Eventsource\Server::MIME_TYPE, '”.', "\n";
     exit;
 }
 
