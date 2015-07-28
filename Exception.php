@@ -34,12 +34,12 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
 
-namespace Hoa\EventSource;
+namespace Hoa\Eventsource;
 
 use Hoa\Core;
 
 /**
- * Class \Hoa\EventSource\Exception.
+ * Class \Hoa\Eventsource\Exception.
  *
  * Extending the \Hoa\Core\Exception class.
  *
