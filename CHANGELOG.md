@@ -1,3 +1,8 @@
+# 2.15.08.13
+
+  * Add a `.gitignore` file. (Stéphane HULARD, 2015-08-03T11:28:51+02:00)
+  * Fix namespace case to `Hoa\Eventsource`. (Ivan Enderlin, 2015-07-28T16:04:49+02:00)
+
 # 2.15.05.29
 
   * Move to PSR-1 and PSR-2. (Ivan Enderlin, 2015-05-12T09:12:09+02:00)
