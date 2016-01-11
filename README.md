@@ -18,7 +18,7 @@ dependencies, you need to require
 ```json
 {
     "require": {
-        "hoa/eventsource": "~2.0"
+        "hoa/eventsource": "~3.0"
     }
 }
 ```
