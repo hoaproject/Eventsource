@@ -1,3 +1,8 @@
+# 3.16.11.19
+
+  * Documentation: New `README.md` file. (Ivan Enderlin, 2016-10-18T15:35:01+02:00)
+  * Documentation: Update `support` properties. (Ivan Enderlin, 2016-10-05T20:38:20+02:00)
+
 # 3.16.01.14
 
   * Composer: New stable library. (Ivan Enderlin, 2016-01-14T21:53:17+01:00)
