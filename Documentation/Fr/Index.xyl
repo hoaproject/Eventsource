@@ -31,7 +31,7 @@
   morceau après morceau (voir la
   <a href="https://tools.ietf.org/html/rfc2616#section-3.6.1">section 3.6.1,
   <em lang="en">Chunked Transfer Coding</em> de la RFC2616</a>) ; aussi, un
-  serveur EventSource est-il plus léger, plus simple et est conçu pour être
+  serveur EventSource est plus léger, plus simple et est conçu pour être
   robuste aux déconnexions.</p>
 
   <h2 id="Events_stream" for="main-toc">Flux d'événements</h2>
