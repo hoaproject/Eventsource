@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /**
  * Hoa
  *
@@ -42,9 +44,6 @@ use Hoa\Http;
  * Class \Hoa\Eventsource\Server.
  *
  * A cross-protocol EventSource server.
- *
- * @copyright  Copyright © 2007-2017 Hoa community
- * @license    New BSD License
  */
 class Server
 {
@@ -58,14 +57,14 @@ class Server
     /**
      * Current event.
      *
-     * @var string
+     * @var ?string
      */
     protected $_event    = null;
 
     /**
      * HTTP response.
      *
-     * @var \Hoa\Http\Response
+     * @var Http\Response
      */
     protected $_response = null;
 
@@ -73,11 +72,8 @@ class Server
 
     /**
      * Start an event source.
-     *
-     * @param   bool  $verifyHeaders    Verify headers or not.
-     * @throws  \Hoa\Eventsource\Exception
      */
-    public function __construct($verifyHeaders = true)
+    public function __construct(bool $verifyHeaders = true)
     {
         if (true === $verifyHeaders && true === headers_sent($file, $line)) {
             throw new Exception(
@@ -129,12 +125,8 @@ class Server
 
     /**
      * Send an event.
-     *
-     * @param   string  $data     Data.
-     * @param   string  $id       ID (empty string to reset).
-     * @return  void
      */
-    public function send($data, $id = null)
+    public function send(string $data, string $id = null)
     {
         if (null !== $this->_event) {
             $this->_response->writeAll('event: ' . $this->_event . "\n");
@@ -162,11 +154,8 @@ class Server
 
     /**
      * Set the reconnection time for the client.
-     *
-     * @param   int    $ms    Time in milliseconds.
-     * @return  void
      */
-    public function setReconnectionTime($ms)
+    public function setReconnectionTime(int $ms)
     {
         $this->_response->writeAll('retry: ' . $ms . "\n\n");
         $this->_response->flush(true);
@@ -176,12 +165,8 @@ class Server
 
     /**
      * Select an event where to send data.
-     *
-     * @param   string  $event    Event.
-     * @return  \Hoa\Eventsource\Server
-     * @throws  \Hoa\Eventsource\Exception
      */
-    public function __get($event)
+    public function __get(string $event): self
     {
         if (false === (bool) preg_match('##u', $event)) {
             throw new Exception(
@@ -206,10 +191,8 @@ class Server
 
     /**
      * Get last ID.
-     *
-     * @return  string
      */
-    public function getLastId()
+    public function getLastId(): string
     {
         return Http\Runtime::getHeader('Last-Event-ID') ?: '';
     }
